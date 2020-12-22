@@ -4,18 +4,46 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D other) {
+    [SerializeField]
+    GameManager GM;
+
+    
+    private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "KillZone"){
-            if(gameObject.transform.position.x < 0){
-                //Player Score + 1                
-            }else if(gameObject.transform.position.x > 0){
-                //Enemy Score + 1;
-            }else{
-                //Ball somehow fell at x 0... respawn the ball and don't increment either score. This shouldn't happen, ever.
+            if(other.name == "RightWall"){
+                GM.scoreManager.playerScores();               
+            }else if(other.name == "LeftWall"){
+                GM.scoreManager.aiScores();
+            }else if(other.name == "TopBar"||other.name == "BottomBar"){ 
+                GM.SpawnBall();
             }
+            print(gameObject.transform.position.ToString());
             Destroy(gameObject);
-        }    
+        }
+
+       
+       
     }
+
+    private void OnCollisionEnter2D(Collision2D other) {        
+        int randomAngle = 0;
+
+        if(other.gameObject.name == "Player"){
+            randomAngle = Random.Range(30,50);
+        } 
+        else if(other.gameObject.name == "AI"){
+            randomAngle = Random.Range(-30, -50);
+        }
+        
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(randomAngle, 0,0));
+        Vector3 targetDirection = targetRotation * Vector3.right;
+        float speed = other.otherRigidbody.velocity.magnitude;
+        //other.otherRigidbody.velocity = speed * targetDirection;
+        print("Hit Paddle");
+        
+    }
+
+    
         
     
 }

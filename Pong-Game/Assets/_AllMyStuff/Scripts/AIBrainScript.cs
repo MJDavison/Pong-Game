@@ -7,6 +7,19 @@ using UnityEngine;
  * */
 public class AIBrainScript : BrainBase
 {
+
+    [SerializeField]
+    public AIMovementScript movement;
+    [SerializeField]   
+    public GameManager GM;
+
+    public GameObject aiPaddle;
+
+    internal bool moveUp;
+    internal bool moveDown;
+    
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,8 +27,10 @@ public class AIBrainScript : BrainBase
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
-    }
+
+        
+    }    
 }

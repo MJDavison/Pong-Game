@@ -30,11 +30,11 @@ public class MovementScript : MonoBehaviour
 
     public void MoveUp(){
         print("Move Up");
-        gameObject.transform.Translate(Vector3.up * Time.deltaTime * movementSpeed);
+        brain.playerPaddle.transform.Translate(Vector3.up * Time.deltaTime * movementSpeed);
     }
 
     public void MoveDown(){
         print("Move Down");
-        gameObject.transform.Translate(Vector3.down * Time.deltaTime * movementSpeed);
+        brain.playerPaddle.transform.Translate(Vector3.down * Time.deltaTime * movementSpeed);
     }
 }

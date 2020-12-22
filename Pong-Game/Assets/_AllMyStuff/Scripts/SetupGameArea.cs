@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /**
  * This script will be responsible for creating the game area. This includes the following:
@@ -9,6 +10,7 @@ using UnityEngine;
  * Drawing the dashed line down the vertical center.                                                    Check
  * Creating text elements for the score. Actual score manipulation will be done by another script.
  **/
+[Serializable]
 public class SetupGameArea : MonoBehaviour
 {
     //Vector3[] gameAreaCorners;
@@ -19,7 +21,7 @@ public class SetupGameArea : MonoBehaviour
     [SerializeField]
     private GameObject middleLine;
 
-    
+    public GameObject paddle;
     public GameObject leftPaddle;
     public GameObject rightPaddle;
 
@@ -50,8 +52,14 @@ public class SetupGameArea : MonoBehaviour
         Instantiate(border);
         Instantiate(middleLine);
 
-        Instantiate(leftPaddle);        
-        Instantiate(rightPaddle);
+        leftPaddle = Instantiate(paddle,new Vector3(-7.5f, 0,0),Quaternion.identity);        
+        rightPaddle= Instantiate(paddle,new Vector3(7.5f, 0,0),Quaternion.identity);
+
+        leftPaddle.tag = "Player";
+        leftPaddle.name = "Player";
+
+        rightPaddle.tag = "AI";
+        rightPaddle.name = "AI";
 
         /*print(gameAreaCorners[0]);
         print(gameAreaCorners[1]);

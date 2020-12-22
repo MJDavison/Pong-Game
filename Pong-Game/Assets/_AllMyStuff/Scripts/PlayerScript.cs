@@ -5,15 +5,18 @@ using UnityEngine;
 public class PlayerScript : BrainBase
 {
     [SerializeField]
+    GameManager GM;
+    [SerializeField]
     public MovementScript movement;
 
     [SerializeField]
-    public PlayerInputScript input;
+    public PlayerInputScript input;    
+    public GameObject playerPaddle;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerPaddle = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
