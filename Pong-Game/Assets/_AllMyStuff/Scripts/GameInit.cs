@@ -29,12 +29,27 @@ public class GameInit : MonoBehaviour
     void Start()
     {
         GM.Init();
-        StartCoroutine(StartGame());
+        // StartCoroutine(StartGame());
     }
 
-    IEnumerator StartGame(){        
-        yield return new WaitForSeconds(5);
-        GM.SpawnBall();
+    // IEnumerator StartGame(){        
+    //     yield return new WaitForSeconds(1);
+    //     GM.SpawnBall();
+    // } 
+
+    public void RespawnBall(){
+        GM.ball.SetActive(false);
+        GM.ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        StartCoroutine(RecenterBall());
+    }
+    
+    
+
+    IEnumerator RecenterBall(){        
+        yield return new WaitForSeconds(1);
+        GM.ball.transform.position = Vector3.zero;
+        //GM.ball.GetComponent<Rigidbody2D>().position = Vector3.zero;
+        GM.ball.SetActive(true);
     } 
 
     

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,24 +14,17 @@ public class AIBrainScript : BrainBase
     [SerializeField]   
     public GameManager GM;
 
-    public GameObject aiPaddle;
+    public GameObject aiPaddle;    
+    
+    
 
     internal bool moveUp;
     internal bool moveDown;
     
 
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        
+    
 
-        
-    }    
+    
 }

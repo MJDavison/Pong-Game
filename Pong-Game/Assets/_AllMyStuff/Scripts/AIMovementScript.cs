@@ -9,22 +9,18 @@ public class AIMovementScript : MonoBehaviour
     [SerializeField]
     int movementSpeed = 5;
     // Start is called before the first frame update
-    Transform target;
-    void Awake()
-    {
-        target = brain.aiPaddle.transform;
-    }
-    
-    // Update is called once per frame
-
-    private void Update() {
-        target.position = new Vector2(target.position.x, brain.GM.b.position.y);
-        print(target.position.ToString());
-    }
-    void FixedUpdate()
-    {
         
-        brain.aiPaddle.transform.position = Vector3.MoveTowards(brain.aiPaddle.transform.position, target.position, Time.deltaTime* movementSpeed);
+    // Update is called once per frame
+    float targetYCoord = 0;
+    private void Update() {
+        targetYCoord = FollowBall();        
+    }
+
+
+    
+    void FixedUpdate()
+    {        
+       brain.aiPaddle.transform.position = new Vector3(brain.aiPaddle.transform.position.x, targetYCoord, brain.aiPaddle.transform.position.z);
     }
 
     public void MoveUp(){
@@ -36,5 +32,9 @@ public class AIMovementScript : MonoBehaviour
     public void MoveDown(){
         print("Move Down");
         brain.aiPaddle.transform.Translate(Vector3.down * Time.deltaTime * movementSpeed);
+    }
+
+    public float FollowBall(){
+         return Mathf.MoveTowards(brain.aiPaddle.transform.position.y, brain.GM.ball.transform.position.y,movementSpeed);
     }
 }

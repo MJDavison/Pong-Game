@@ -5,41 +5,35 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     [SerializeField]
+    
     GameManager GM;
+    Rigidbody2D rb;
+    Vector2 direction;
 
     
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "KillZone"){
-            if(other.name == "RightWall"){
-                GM.scoreManager.playerScores();               
-            }else if(other.name == "LeftWall"){
-                GM.scoreManager.aiScores();
-            }else if(other.name == "TopBar"||other.name == "BottomBar"){ 
-                GM.SpawnBall();
-            }
-            print(gameObject.transform.position.ToString());
-            Destroy(gameObject);
-        }
+            GM.scoreManager.Score();                    
+        }           
+    }
+    
 
-       
-       
+    private void Start() {
+        rb = GetComponent<Rigidbody2D>();
+        direction = Vector2.one.normalized; 
+    }
+
+    private void FixedUpdate() {
+        rb.velocity = direction * GM.ballSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {        
-        int randomAngle = 0;
-
-        if(other.gameObject.name == "Player"){
-            randomAngle = Random.Range(30,50);
-        } 
-        else if(other.gameObject.name == "AI"){
-            randomAngle = Random.Range(-30, -50);
+        if(other.gameObject.CompareTag("Wall")){
+            direction.y = -direction.y;
         }
-        
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(randomAngle, 0,0));
-        Vector3 targetDirection = targetRotation * Vector3.right;
-        float speed = other.otherRigidbody.velocity.magnitude;
-        //other.otherRigidbody.velocity = speed * targetDirection;
-        print("Hit Paddle");
+        else if(other.gameObject.CompareTag("Paddle")){
+            direction.x = -direction.x;
+        }        
         
     }
 

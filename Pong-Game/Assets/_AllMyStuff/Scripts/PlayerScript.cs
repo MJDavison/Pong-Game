@@ -16,7 +16,7 @@ public class PlayerScript : BrainBase
     // Start is called before the first frame update
     void Start()
     {
-        playerPaddle = GameObject.FindGameObjectWithTag("Player");
+        playerPaddle = GameObject.Find("Player");
     }
 
     // Update is called once per frame

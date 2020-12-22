@@ -39,12 +39,22 @@ public class ScoreManager : ScriptableObject
         GM.uiManager.UpdateScore();
         if(aiScore == 11 || playerScore == 11){
             GM.GameOver();
-        }
-        GM.SpawnBall();
+        }        
     }
 
     public void ResetScores(){
         playerScore = 0;
         aiScore = 0;
+    }
+
+    public void Score(){
+        if(GM.ball.transform.position.x < 0){
+            aiScores();
+        }
+        else{
+            playerScores();
+        }
+        Debug.Log(GM.ball.transform.position.ToString());
+            GM.gameInit.RespawnBall();
     }
 }

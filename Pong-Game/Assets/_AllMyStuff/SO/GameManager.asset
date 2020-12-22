@@ -15,6 +15,6 @@ MonoBehaviour:
   scoreManager: {fileID: 11400000, guid: 59d8d4fe584450f4c87f284aa5f7f13d, type: 2}
   uiManager: {fileID: 0}
   gameInit: {fileID: 0}
-  ball: {fileID: 4038107494758010175, guid: 1c9cef2c8c4af1f4c87a2e7816bb8945, type: 3}
-  b: {fileID: 0}
+  ball: {fileID: 0}
+  ballRB: {fileID: 0}
   ballSpeed: 5
