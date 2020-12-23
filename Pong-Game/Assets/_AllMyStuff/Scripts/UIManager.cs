@@ -16,22 +16,17 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     public Canvas canvas;
     
-    Text playerScoreText;
+    public Text playerScoreText;
     
-    Text aiScoreText;
+    public Text aiScoreText;
     // Start is called before the first frame update
-    void Start()
-    {
-        print(gameObject.name);
-        playerScoreText = GameObject.Find("Left_Score").GetComponentInChildren<Text>();
-        aiScoreText = GameObject.Find("Right_Score").GetComponentInChildren<Text>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+    // void Start()
+    // {
+    //     //print(gameObject.name);
         
-    }
+    // }
+
+    
 
     public void UpdateScore(){
         playerScoreText.text = GM.scoreManager.playerScore.ToString();

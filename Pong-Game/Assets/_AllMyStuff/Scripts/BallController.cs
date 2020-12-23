@@ -36,21 +36,23 @@ public class BallController : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {        
-        if(other.gameObject.CompareTag("Wall")){
-            float x = PositionOnPaddle(transform.position, other.transform.position, other.collider.bounds.size.x);
-            if(other.gameObject.name == "TopWall"){
-                direction = new Vector2(1,x).normalized;
-            }
-            else if(other.gameObject.name=="BottomWall"){
-                direction = new Vector2(-1,x).normalized;
-            }
-            rb.velocity = direction * GM.ballSpeed;
+        // if(other.gameObject.CompareTag("Wall")){
+        //     float x = PositionOnPaddle(transform.position, other.transform.position, other.collider.bounds.size.x);
+        //     x = x*50;
+        //     if(other.gameObject.name == "TopWall"){
+        //         direction = new Vector2(1,x);
+        //     }
+        //     else if(other.gameObject.name=="BottomWall"){
+        //         direction = new Vector2(-1,x);
+        //     }
+        //     rb.velocity = direction * GM.ballSpeed;
             
-            print("Wall bounce: "+ rb.velocity);
-            print(other.gameObject.name+"bounce: " + rb.velocity);      
-            // direction.y = -direction.y;
-        }
-        else if(other.gameObject.CompareTag("Paddle")){
+        //     print("Wall bounce: "+ rb.velocity);
+        //     print(other.gameObject.name+"bounce: " + rb.velocity);      
+              direction = new Vector2(1, -direction.y);
+        // }
+        // else
+         if(other.gameObject.CompareTag("Paddle")){
             float y = PositionOnPaddle(transform.position, other.transform.position, other.collider.bounds.size.y);            
             if(other.gameObject.name =="LeftPaddle"){
                 direction = new Vector2(1, y).normalized;                

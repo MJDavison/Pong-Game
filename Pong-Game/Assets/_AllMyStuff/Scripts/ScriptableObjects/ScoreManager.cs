@@ -38,7 +38,17 @@ public class ScoreManager : ScriptableObject
     public void UpdateScore(){
         GM.uiManager.UpdateScore();
         if(aiScore == 11 || playerScore == 11){
+            GM.playerWin = Winner();
             GM.GameOver();
+            
+        }        
+    }
+
+    public bool Winner(){
+        if(playerScore > aiScore){
+            return true;
+        }else{
+            return false;
         }        
     }
 

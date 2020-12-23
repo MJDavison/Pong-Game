@@ -42,6 +42,7 @@ public class MovementScript : MonoBehaviour
         print("Move Down");
         // brain.playerPaddle.transform.Translate(Vector3.down * Time.deltaTime * movementSpeed);
         rb.velocity = Vector2.down * Time.fixedDeltaTime * movementSpeed;        
+        
     }
 
     public void StopMoving(){
