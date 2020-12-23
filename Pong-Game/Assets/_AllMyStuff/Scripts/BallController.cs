@@ -16,11 +16,19 @@ public class BallController : MonoBehaviour
             GM.scoreManager.Score();                    
         }           
     }
+
+    private float PositionOnPaddle(Vector2 ballPos, Vector2 paddlePos, float paddleHeight){
+
+        return (ballPos.y  - paddlePos.y) / paddleHeight;
+    }
     
 
     private void Start() {
-        rb = GetComponent<Rigidbody2D>();
-        direction = Vector2.one.normalized; 
+        
+        rb = GetComponent<Rigidbody2D>();        
+        direction = new Vector2(-1,0); 
+        rb.velocity = direction * GM.ballSpeed;
+        // print(direction);
     }
 
     private void FixedUpdate() {
@@ -29,10 +37,28 @@ public class BallController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {        
         if(other.gameObject.CompareTag("Wall")){
-            direction.y = -direction.y;
+            float x = PositionOnPaddle(transform.position, other.transform.position, other.collider.bounds.size.x);
+            if(other.gameObject.name == "TopWall"){
+                direction = new Vector2(1,x).normalized;
+            }
+            else if(other.gameObject.name=="BottomWall"){
+                direction = new Vector2(-1,x).normalized;
+            }
+            rb.velocity = direction * GM.ballSpeed;
+            
+            print("Wall bounce: "+ rb.velocity);
+            print(other.gameObject.name+"bounce: " + rb.velocity);      
+            // direction.y = -direction.y;
         }
         else if(other.gameObject.CompareTag("Paddle")){
-            direction.x = -direction.x;
+            float y = PositionOnPaddle(transform.position, other.transform.position, other.collider.bounds.size.y);            
+            if(other.gameObject.name =="LeftPaddle"){
+                direction = new Vector2(1, y).normalized;                
+            } else if(other.gameObject.name=="RightPaddle"){
+                direction = new Vector2(-1, y).normalized;
+            }
+            rb.velocity = direction * GM.ballSpeed;     
+            print(other.gameObject.name+"bounce: " + rb.velocity);                                       
         }        
         
     }
